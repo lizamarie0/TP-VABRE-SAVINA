@@ -16,7 +16,7 @@ public class MiniProjet_VABRE_SAVINA {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        2
+        
     }
     
 }
