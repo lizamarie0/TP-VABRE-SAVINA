@@ -8,5 +8,5 @@
  * @author Liza Savina
  */
 public class Combinaison {
-    gthhft
+    
 }
