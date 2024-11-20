@@ -9,5 +9,19 @@
  * @author alien
  */
 public class Pion {
-    hsj
+   private Character couleur;
+   
+   public Pion(Character couleur){
+   this.couleur = couleur;
+   }
+   
+   public Character getCouleur(){
+       return couleur;
+   
+    }
+   
+   public String toString(){
+       return couleur.toString();
+   }
+   
 }
