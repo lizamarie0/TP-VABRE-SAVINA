@@ -1,3 +1,5 @@
+package miniprojet_vabre_savina;
+
 /*
  * SAVINA Liza
  * VABRE Aliénor
@@ -26,7 +28,7 @@ public class Pion {
      */
     @Override
    public String toString(){
-       return couleur.toString();
+       return Character.toString(couleur);
    }
    
 }
