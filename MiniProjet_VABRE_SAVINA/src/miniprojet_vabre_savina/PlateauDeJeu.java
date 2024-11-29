@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * SAVINA Liza
+ * VABRE Aliénor
+ * 29/11/2024
  */
 package miniprojet_vabre_savina;
 
@@ -31,20 +32,33 @@ public class PlateauDeJeu {
     public void proposerCombinaison(Combinaison tentative) {
         if (tentatives.size() >= nbToursMax) {
             System.out.println("Nombre maximal de tours atteint !");
+            return;
         }
         
         tentatives.add(tentative);
-
-    
     
     String indices = calculerIndices(tentative);
         reponses.add(indices);
 
         // Afficher les résultats pour cette tentative
-        System.out.println("Tentative : " + tentative);
+        System.out.println("Tentative : " + tentative.toString());
         System.out.println("Indices : " + indices);
     }
     
+     // Calculer les indices (pions noirs et blancs)
+    private String calculerIndices(Combinaison tentative) {
+        int[] resultats = combinaisonSecrete.comparer(tentative);
+        return resultats[0] + " noirs, " + resultats[1] + " blancs";
+    }
+    
+    public void afficherPlateau(){
+        System.out.println("Historique des tentatives :");
+        for (int i = 0; i < tentatives.size(); i++) {
+            Combinaison tentative = tentatives.get(i);
+            String reponse = reponses.get(i);
+            System.out.println("Tentative " + (i + 1) + ": " + tentative + " | Réponse : " + reponse);
+    }
+}
     
     public boolean estVictoire() {
         if (tentatives.isEmpty()) return false;
