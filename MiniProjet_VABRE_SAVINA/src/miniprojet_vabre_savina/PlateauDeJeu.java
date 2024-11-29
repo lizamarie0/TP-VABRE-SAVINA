@@ -11,6 +11,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Liza Savina
+ * @author alien
  */
 public class PlateauDeJeu {
     Combinaison combinaisonSecrete;
@@ -55,17 +56,16 @@ public class PlateauDeJeu {
         for (int i = 0; i < tentatives.size(); i++) {
             Combinaison tentative = tentatives.get(i);
             String reponse = reponses.get(i);
-            System.out.println("Tentative " + (i + 1) + ": " + tentative + " | Réponse : " + reponse);
+            System.out.println("Tentative " + (i + 1) + ": " + tentative + " | Reponse : " + reponse);
     }
 }
     
     public boolean estVictoire() {
         if (tentatives.isEmpty()) return false;
         Combinaison derniereTentative = tentatives.get(tentatives.size() - 1);
-        return combinaisonSecrete.equals(derniereTentative);
+        return true;
     }
 
-    // Vérifier si le joueur a perdu
     public boolean estDefaite() {
         return tentatives.size() >= nbToursMax && !estVictoire();
     }

@@ -9,6 +9,7 @@ package miniprojet_vabre_savina;
 /**
  *
  * @author alien
+ * @author Liza Savina
  */
 public class Pion {
    private final Character couleur;

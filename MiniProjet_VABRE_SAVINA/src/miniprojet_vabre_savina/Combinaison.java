@@ -2,9 +2,7 @@ package miniprojet_vabre_savina;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
-import miniprojet_vabre_savina.Pion;
 
 /*
  * SAVINA Liza
@@ -15,6 +13,7 @@ import miniprojet_vabre_savina.Pion;
 /**
  *
  * @author Liza Savina
+ * @author alien
  */
 public class Combinaison {
     
