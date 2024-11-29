@@ -9,7 +9,7 @@
  * @author alien
  */
 public class Pion {
-   private Character couleur;
+   private final Character couleur;
    
    public Pion(Character couleur){
    this.couleur = couleur;
@@ -20,6 +20,11 @@ public class Pion {
    
     }
    
+    /**
+     *
+     * @return
+     */
+    @Override
    public String toString(){
        return couleur.toString();
    }
