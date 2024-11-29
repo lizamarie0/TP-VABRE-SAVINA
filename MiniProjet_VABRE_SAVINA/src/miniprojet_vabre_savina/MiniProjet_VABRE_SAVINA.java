@@ -16,12 +16,11 @@ public class MiniProjet_VABRE_SAVINA {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Pion Rouge = new Pion('R');
-        Pion Bleu = new Pion('B');
-        Pion Jaune = new Pion('Y');
-        Pion Vert = new Pion('G');
-        
-        System.out.println(Rouge);
+        Pion[] pions1 = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
+        Pion[] pions2 = { new Pion('R'), new Pion('G'), new Pion('B'), new Pion('Y') };
+
+        Combinaison combinaison1 = new Combinaison(pions1);
+        Combinaison combinaison2 = new Combinaison(pions2);
         
         
     }
