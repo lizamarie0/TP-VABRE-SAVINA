@@ -47,7 +47,7 @@ public class Combinaison {
         // ces deux tableaux permettent d'éviter des erreurs comme des doublons.
         
         for (int i = 0; i < taille; i++) {
-            if (Objects.equals(this.elements[i].getCouleur(), autre.elements[i].getCouleur())) { //Si la couleur du pion est identique dans les deux combinaison pour une même place alors:
+            if (this.elements[i].getCouleur() == autre.elements[i].getCouleur()) { //Si la couleur du pion est identique dans les deux combinaison pour une même place alors:
             noir++; //On ajoute un pion noir.
             VisitedAutre[i] = true; //On note son indice comme visité dans la liste.
             VisitedCurrent[i] = true; //On note son indice comme visité dans la liste.
@@ -56,7 +56,7 @@ public class Combinaison {
         for (int i = 0; i < taille; i++) {
             if (!VisitedCurrent[i]){ //On parcours tous les pions qui n'ont pas été comptés comme noirs avec la précédente boucle.
                 for (int j = 0; j < taille; j++){ 
-                    if(VisitedAutre[i]&&this.elements[i].getCouleur() == autre.elements[j].getCouleur()){ //Pour chaque pions restant, on cherche dans la combinaison "Autre", une couleur qui n'a pas encore été utilisée.
+                    if(!VisitedAutre[j]&&this.elements[i].getCouleur() == autre.elements[j].getCouleur()){ //Pour chaque pions restant, on cherche dans la combinaison "Autre", une couleur qui n'a pas encore été utilisée.
                         blanc++; //Si c'est vrai, on a un pion blanc en plus.
                         VisitedAutre[j]=true; // On note son indice comme visité dans la liste.
                         break;
