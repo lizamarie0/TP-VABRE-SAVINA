@@ -18,7 +18,7 @@ import java.util.Random;
 public class Combinaison {
     
     Pion [] elements;
-    private int taille;
+    int taille;
     
      public Combinaison(Pion[] elements) {
         this.elements = elements;

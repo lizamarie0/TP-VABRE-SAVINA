@@ -20,6 +20,7 @@ public class MiniProjet_VABRE_SAVINA {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        //tests de la classe Pion et combianaison:
         
         /* Pion[] pions1 = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
         Pion[] pions2 = { new Pion('G'), new Pion('G'), new Pion('B'), new Pion('Y') };
@@ -44,7 +45,7 @@ public class MiniProjet_VABRE_SAVINA {
         System.out.println("Combinaison aleatoire : " + combinaisonAleatoire.toString());*/
         
          
-        Pion[] pionsSecretes = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
+       /* Pion[] pionsSecretes = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
         Combinaison combinaisonSecrete = new Combinaison(pionsSecretes);
 
       
@@ -64,5 +65,18 @@ public class MiniProjet_VABRE_SAVINA {
             System.out.println("Dommage, vous avez perdu...");
         }
     }
-    
+    */
+   
+        ArrayList<Character> couleursDisponibles = new ArrayList<>();
+        couleursDisponibles.add('R');
+        couleursDisponibles.add('B');
+        couleursDisponibles.add('G');
+        couleursDisponibles.add('Y');
+        
+        int nbToursMax = 8;
+        int tailleCombinaison = 4;
+        
+  
+        
+}
 }
