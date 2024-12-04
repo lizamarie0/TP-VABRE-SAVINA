@@ -109,6 +109,7 @@ public class Partie {
         // Vérifier si la partie est terminée
         if (plateau.estVictoire()) {
             System.out.println("Bravo ! Vous avez trouve la combinaison secrete !");
+            System.out.println("Vous avez reussi en " + tour + " sur " + nbToursMax + " tours maximum.");
             break;
         } else if (plateau.estDefaite()) {
             System.out.println("Dommage, vous avez perdu... La combinaison secrete était : " + plateau.combinaisonSecrete);

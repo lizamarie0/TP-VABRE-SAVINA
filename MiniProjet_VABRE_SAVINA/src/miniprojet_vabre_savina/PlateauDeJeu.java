@@ -61,10 +61,11 @@ public class PlateauDeJeu {
 }
     
     public boolean estVictoire() {
-        if (tentatives.isEmpty()) return false;
-        Combinaison derniereTentative = tentatives.get(tentatives.size() - 1);
-        return true;
-    }
+    if (tentatives.isEmpty()) return false;
+    Combinaison derniereTentative = tentatives.get(tentatives.size() - 1);
+    int[] resultats = combinaisonSecrete.comparer(derniereTentative);
+    return resultats[0] == combinaisonSecrete.taille;
+}
 
     public boolean estDefaite() {
         return tentatives.size() >= nbToursMax && !estVictoire();
