@@ -1,15 +1,18 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * SAVINA Liza
  * VABRE Aliénor
  * 29/11/2024
  */
+
 /**
  *
  * @author alien
@@ -17,32 +20,53 @@ import javax.swing.JFrame;
 public class MasterMind extends JFrame {
 
     private Color[] couleurs = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
-    private int indexCouleur = 0;
+    private Map<Color, Integer> couleurToNumero = new HashMap<>();
     private JButton btnValider;
-   
+
+    private Integer[][] plateauDeJeu = new Integer[8][4]; // Plateau de jeu, initialisé à null
     private JButton[][] grilleButtons = new JButton[8][4];
     private JButton[] combinaisonButtons = new JButton[4];
+    private int[] combinaisonNumerique = new int[4]; // Numéros associés à la combinaison en cours
+    private int currentRow = 7; // Ligne actuelle (de bas en haut)
+
 
     /**
      * Constructeur principal
      */
     public MasterMind() {
-        initComponents(); // Initialisation automatique
+        setTitle("MasterMind");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setSize(400, 600);
+
+        initMapCouleurs(); // Associe les couleurs aux numéros
+        initComponents();
         configurerPanneauGrille();
         configurerPanneauCombinaison();
-       
+
+        // Listener pour le bouton Valider
+        btnvalider.addActionListener(e -> validerCombinaison());
+    }
+
+    /**
+     * Initialise la correspondance entre les couleurs et les numéros.
+     */
+    private void initMapCouleurs() {
+        for (int i = 0; i < couleurs.length; i++) {
+            couleurToNumero.put(couleurs[i], i + 1); // Associe les couleurs à des numéros (1, 2, 3, 4, ...)
+        }
     }
 
     /**
      * Configure les boutons dans le panneau de grille.
      */
     private void configurerPanneauGrille() {
-        PanneauGrille.setLayout(new GridLayout(8, 4, 3, 3)); // Grille de 8x4 avec marges
+        PanneauGrille.setLayout(new GridLayout(8, 4, 3, 3));
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 4; j++) {
                 grilleButtons[i][j] = new JButton();
-                grilleButtons[i][j].setEnabled(false); // Désactiver les boutons de la grille par défaut
-                grilleButtons[i][j].setBackground(Color.WHITE); // Couleur initiale
+                grilleButtons[i][j].setEnabled(false); // Désactivé par défaut
+                grilleButtons[i][j].setBackground(Color.WHITE);
                 PanneauGrille.add(grilleButtons[i][j]);
             }
         }
@@ -52,42 +76,58 @@ public class MasterMind extends JFrame {
      * Configure les boutons dans le panneau de combinaison.
      */
     private void configurerPanneauCombinaison() {
-        Combinaison.setLayout(new GridLayout(1, 4, 3, 3)); // Ligne de 4 boutons
+        Combinaison.setLayout(new GridLayout(1, 4, 3, 3));
         for (int i = 0; i < 4; i++) {
             combinaisonButtons[i] = new JButton();
-            combinaisonButtons[i].setBackground(couleurs[indexCouleur]); // Initialiser avec la première couleur
+            combinaisonButtons[i].setBackground(couleurs[0]); // Couleur initiale
+            combinaisonNumerique[i] = couleurToNumero.get(couleurs[0]); // Numéro initial
             final int index = i;
             combinaisonButtons[i].addActionListener(e -> {
-                indexCouleur = (indexCouleur + 1) % couleurs.length; // Change la couleur à chaque clic
-                combinaisonButtons[index].setBackground(couleurs[indexCouleur]);
+                // Change la couleur et met à jour le numéro correspondant
+                Color currentColor = combinaisonButtons[index].getBackground();
+                int nextIndex = (indexCouleur(couleurs, currentColor) + 1) % couleurs.length;
+                Color nextColor = couleurs[nextIndex];
+                combinaisonButtons[index].setBackground(nextColor);
+                combinaisonNumerique[index] = couleurToNumero.get(nextColor);
             });
             Combinaison.add(combinaisonButtons[i]);
         }
     }
 
     /**
-     * Copie la combinaison sélectionnée dans une ligne vide de la grille.
+     * Retourne l'index d'une couleur donnée dans le tableau de couleurs.
      */
-     public void validerCombinaison() {
-        // Chercher une ligne vide dans la grille
-        for (int i = 0; i < 8; i++) {
-            boolean ligneVide = true;
-            for (int j = 0; j < 4; j++) {
-                if (grilleButtons[i][j].getBackground() != Color.WHITE) {
-                    ligneVide = false;
-                    break;
-                }
-            }
-
-            // Si la ligne est vide, copier la combinaison dans cette ligne
-            if (ligneVide) {
-                for (int j = 0; j < 4; j++) {
-                    grilleButtons[i][j].setBackground(combinaisonButtons[j].getBackground());
-                }
-                break;
+    private int indexCouleur(Color[] couleurs, Color couleur) {
+        for (int i = 0; i < couleurs.length; i++) {
+            if (couleurs[i].equals(couleur)) {
+                return i;
             }
         }
+        return -1; // Couleur non trouvée
     }
+
+    /**
+     * Valide la combinaison en cours, l'ajoute au plateau et l'affiche dans la grille.
+     */
+    public void validerCombinaison() {
+        // Vérifie si toutes les lignes sont déjà remplies
+        if (currentRow < 0) {
+            JOptionPane.showMessageDialog(this, "Toutes les lignes ont été remplies !");
+            return;
+        }
+
+        // Ajoute les numéros de la combinaison au plateau
+        for (int col = 0; col < 4; col++) {
+            plateauDeJeu[currentRow][col] = combinaisonNumerique[col];
+            grilleButtons[currentRow][col].setBackground(combinaisonButtons[col].getBackground());
+        }
+
+        // Passe à la ligne suivante (au-dessus)
+        currentRow--;
+    }
+
+    
+   
     
         /**
          * This method is called from within the constructor to initialize the form.
@@ -133,15 +173,15 @@ public class MasterMind extends JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanneauGrille, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                     .addComponent(Combinaison, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(56, 56, 56)
+                .addGap(27, 27, 27)
                 .addComponent(btnvalider)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(PanneauGrille, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(PanneauGrille, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -149,7 +189,7 @@ public class MasterMind extends JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnvalider)
-                        .addGap(61, 61, 61))))
+                        .addGap(48, 48, 48))))
         );
 
         pack();
@@ -164,23 +204,7 @@ public class MasterMind extends JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MasterMind.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MasterMind.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MasterMind.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MasterMind.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
