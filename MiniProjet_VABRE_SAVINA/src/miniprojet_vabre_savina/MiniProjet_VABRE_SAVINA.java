@@ -5,8 +5,9 @@
  */
 package miniprojet_vabre_savina;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import javax.swing.*;
 /**
  *
  * @author alien
@@ -20,20 +21,28 @@ public class MiniProjet_VABRE_SAVINA {
     public static void main(String[] args) {
         // TODO code application logic here
         
+         /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new MasterMind().setVisible(true);
+//        });
+        SwingUtilities.invokeLater(() -> {
+            MasterMind frame1 = new MasterMind();
+            frame1.setVisible(true);
+        });
         //tests de la classe Pion et combianaison:
         
-        /* Pion[] pions1 = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
-        Pion[] pions2 = { new Pion('G'), new Pion('G'), new Pion('B'), new Pion('Y') };
-        
-        Combinaison combinaison1 = new Combinaison(pions1);
-        Combinaison combinaison2 = new Combinaison(pions2);
-        
-        System.out.println("Combinaison 1 : " + combinaison1.toString());
-        System.out.println("Combinaison 2 : " + combinaison2.toString());
-        
-        int[] resultat = combinaison1.comparer(combinaison2);
-        System.out.println("Pions bien places : " + resultat[0]);
-        System.out.println("Pions mal places : " + resultat[1]);*/
+//        Pion[] pions1 = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
+//        Pion[] pions2 = { new Pion('G'), new Pion('G'), new Pion('B'), new Pion('Y') };
+//        
+//        Combinaison combinaison1 = new Combinaison(pions1);
+//        Combinaison combinaison2 = new Combinaison(pions2);
+//        
+//        System.out.println("Combinaison 1 : " + combinaison1.toString());
+//        System.out.println("Combinaison 2 : " + combinaison2.toString());
+//        
+//        int[] resultat = combinaison1.comparer(combinaison2);
+//        System.out.println("Pions bien places : " + resultat[0]);
+//        System.out.println("Pions mal places : " + resultat[1]);
         
         /*ArrayList<Character> couleursDisponibles = new ArrayList<>();
         couleursDisponibles.add('R');
@@ -67,15 +76,15 @@ public class MiniProjet_VABRE_SAVINA {
     }
     */
    
-        ArrayList<Character> couleursDisponibles = new ArrayList<>();
-        couleursDisponibles.add('R');
-        couleursDisponibles.add('B');
-        couleursDisponibles.add('G');
-        couleursDisponibles.add('Y');
-        
-        Partie partie1 = new Partie(4,8,couleursDisponibles);
-        
-        Pion[] pionsSecretes = partie1.plateau.combinaisonSecrete.elements; // On récupère la combinaison secrète
+//        ArrayList<Character> couleursDisponibles = new ArrayList<>();
+//        couleursDisponibles.add('R');
+//        couleursDisponibles.add('B');
+//        couleursDisponibles.add('G');
+//        couleursDisponibles.add('Y');
+//        
+//        Partie partie1 = new Partie(4,8,couleursDisponibles);
+//        
+//        Pion[] pionsSecretes = partie1.plateau.combinaisonSecrete.elements; // On récupère la combinaison secrète
         
         /*Combinaison tentativeGagnante = new Combinaison(pionsSecretes);   // Crée une combinaison identique pour gagner
         partie1.plateau.proposerCombinaison(tentativeGagnante);
@@ -86,7 +95,7 @@ public class MiniProjet_VABRE_SAVINA {
             System.out.println("Échec : la combinaison n'est pas correcte.");
         } */
         
-        partie1.LancerPartie();
+//        partie1.LancerPartie();
         
         
   
