@@ -45,13 +45,16 @@ public class Combinaison {
         
         // ces deux tableaux permettent d'éviter des erreurs comme des doublons.
         
-        for (int i = 0; i < taille; i++) {
-            if (this.elements[i].getCouleur() == autre.elements[i].getCouleur()) { //Si la couleur du pion est identique dans les deux combinaison pour une même place alors:
-            noir++; //On ajoute un pion noir.
-            VisitedAutre[i] = true; //On note son indice comme visité dans la liste.
-            VisitedCurrent[i] = true; //On note son indice comme visité dans la liste.
-    }
-}
+        for (int i = 0; i < taille; i++) 
+        {
+            if (this.elements[i].getCouleur() == autre.elements[i].getCouleur()) 
+            { 
+                //Si la couleur du pion est identique dans les deux combinaison pour une même place alors:
+                noir++; //On ajoute un pion noir.
+                VisitedAutre[i] = true; //On note son indice comme visité dans la liste.
+                VisitedCurrent[i] = true; //On note son indice comme visité dans la liste.
+            }
+        }
         for (int i = 0; i < taille; i++) {
             if (!VisitedCurrent[i]){ //On parcours tous les pions qui n'ont pas été comptés comme noirs avec la précédente boucle.
                 for (int j = 0; j < taille; j++){ 

@@ -1,5 +1,7 @@
 package miniprojet_vabre_savina;
 
+import java.awt.Color;
+
 /*
  * SAVINA Liza
  * VABRE Aliénor
@@ -12,13 +14,13 @@ package miniprojet_vabre_savina;
  * @author Liza Savina
  */
 public class Pion {
-   private final Character couleur;
+   private final Color couleur;
    
-   public Pion(Character couleur){
+   public Pion(Color couleur){
    this.couleur = couleur;
    }
    
-   public Character getCouleur(){
+   public Color getCouleur(){
        return couleur;
    
     }
@@ -29,7 +31,7 @@ public class Pion {
      */
     @Override
    public String toString(){
-       return Character.toString(couleur);
+       return couleur.toString();
    }
    
 }

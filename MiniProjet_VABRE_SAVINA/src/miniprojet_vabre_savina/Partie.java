@@ -62,7 +62,7 @@ public class Partie {
      public void LancerPartie(){
          Scanner sc = new Scanner(System.in);
          int tour = 1;
-        
+         
          
         /* while (tour <= plateau.nbToursMax &&){
              plateau.afficherPlateau();

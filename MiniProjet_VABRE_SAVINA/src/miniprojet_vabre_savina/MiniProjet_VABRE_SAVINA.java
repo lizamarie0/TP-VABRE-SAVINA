@@ -25,10 +25,12 @@ public class MiniProjet_VABRE_SAVINA {
 //        java.awt.EventQueue.invokeLater(() -> {
 //            new MasterMind().setVisible(true);
 //        });
-        SwingUtilities.invokeLater(() -> {
-            MasterMind frame1 = new MasterMind();
-            frame1.setVisible(true);
-        });
+//        SwingUtilities.invokeLater(() -> {
+//            MainFrame frame1 = new MainFrame();
+//            frame1.setVisible(true);
+//        });
+         MainFrame frame1 = new MainFrame();
+         frame1.setVisible(true);
         //tests de la classe Pion et combianaison:
         
 //        Pion[] pions1 = { new Pion('R'), new Pion('B'), new Pion('G'), new Pion('Y') };
